@@ -1,73 +1,61 @@
-# Welcome to your Lovable project
+# 🧮 Self-Learning Digital Counter Simulator
 
-## Project info
+## 🔍 Project Overview
+The **Self-Learning Digital Counter Simulator** is an interactive web-based project that demonstrates how an **AI logic can adaptively control a digital counter’s mode**.  
+The system allows counting in **Up**, **Down**, and **Mod-N** modes, and features an **AI Mode** that automatically learns the user’s pattern of interaction and adapts accordingly.
 
-**URL**: https://lovable.dev/projects/16e8da60-fd87-4291-a76d-ebdda84dc971
+This project simulates the concept of an **adaptive Finite State Machine (FSM)** that changes its counting behavior dynamically based on usage patterns.
 
-## How can I edit this code?
+---
 
-There are several ways of editing your application.
+## 🎯 Objective
+To design a **self-learning counter** that intelligently switches between:
+- **Up Counter**
+- **Down Counter**
+- **Mod-N Counter**
 
-**Use Lovable**
+based on the **user’s previous actions and control signals**.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/16e8da60-fd87-4291-a76d-ebdda84dc971) and start prompting.
+---
 
-Changes made via Lovable will be committed automatically to this repo.
+## ⚙️ Key Features
+- **Interactive Counter Display** – shows the live counter value with animations.  
+- **Four Operational Modes:**
+  - **Up Mode:** Increments count continuously.
+  - **Down Mode:** Decrements count continuously.
+  - **Mod-N Mode:** Counts from 0 to N–1, then resets to 0 (user inputs N).
+  - **AI Mode:** Automatically detects user pattern and chooses mode accordingly.
+- **AI Learning Logic:**
+  - Observes the user’s last 5 actions.
+  - Detects which mode was used most.
+  - Switches to that mode automatically when AI Mode is activated.
+- **AI Decision Log:** Displays the reasoning behind AI’s mode selection.
+- **Light/Dark Mode Toggle**
+- **Project Report Page:** Explains the concept of counters and FSM transitions.
 
-**Use your preferred IDE**
+---
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🧰 Technology Stack
+- **React (with Vite)** – for fast, modern frontend development  
+- **TypeScript** – for type-safe and reliable code  
+- **Tailwind CSS + shadcn/ui** – for responsive and elegant UI components  
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+---
 
-Follow these steps:
+## 🧠 System Flow
+1. The user manually interacts with the counter using Up, Down, or Mod-N buttons.  
+2. The system records the last five actions.  
+3. Once at least five inputs are given, the **AI Mode** becomes active.  
+4. When AI Mode is enabled, it analyzes the recent pattern:
+   - Mostly “Up” actions → switches to **Up Counter**  
+   - Mostly “Down” actions → switches to **Down Counter**  
+   - Mostly “Mod” actions → continues **Mod-N Counter**  
+5. The result is displayed dynamically, and the **AI Decision Log** updates to show how the mode was chosen.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+---
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+## 💻 How to Run the Project
 
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/16e8da60-fd87-4291-a76d-ebdda84dc971) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+### 1️⃣ Clone the Repository
+```bash
+git clone <YOUR_GIT_REPOSITORY_URL>
