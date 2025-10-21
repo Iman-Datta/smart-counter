@@ -8,7 +8,7 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
+    --background: 210 40% 98%;
     --foreground: 222.2 84% 4.9%;
 
     --card: 0 0% 100%;
@@ -37,6 +37,26 @@ All colors MUST be HSL.
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+    
+    /* Counter Mode Colors */
+    --mode-up: 142 76% 36%;
+    --mode-up-glow: 142 76% 50%;
+    --mode-down: 0 84% 60%;
+    --mode-down-glow: 0 84% 70%;
+    --mode-mod: 217 91% 60%;
+    --mode-mod-glow: 217 91% 70%;
+    --mode-ai: 271 81% 56%;
+    --mode-ai-glow: 271 81% 70%;
+    
+    /* Tech Gradients */
+    --gradient-tech: linear-gradient(135deg, hsl(217 91% 60% / 0.1), hsl(271 81% 56% / 0.1));
+    --gradient-display: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    
+    /* Shadows */
+    --shadow-glow-up: 0 0 20px hsl(var(--mode-up-glow) / 0.3);
+    --shadow-glow-down: 0 0 20px hsl(var(--mode-down-glow) / 0.3);
+    --shadow-glow-mod: 0 0 20px hsl(var(--mode-mod-glow) / 0.3);
+    --shadow-glow-ai: 0 0 20px hsl(var(--mode-ai-glow) / 0.3);
 
     --sidebar-background: 0 0% 98%;
 
@@ -59,7 +79,7 @@ All colors MUST be HSL.
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
 
-    --card: 222.2 84% 4.9%;
+    --card: 217.2 32.6% 10%;
     --card-foreground: 210 40% 98%;
 
     --popover: 222.2 84% 4.9%;
@@ -83,6 +103,10 @@ All colors MUST be HSL.
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+    
+    /* Dark mode gradient adjustments */
+    --gradient-tech: linear-gradient(135deg, hsl(217 91% 30% / 0.2), hsl(271 81% 36% / 0.2));
+    --gradient-display: linear-gradient(180deg, hsl(217.2 32.6% 10%), hsl(222.2 84% 4.9%));
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
