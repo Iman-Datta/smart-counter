@@ -58,4 +58,4 @@ based on the **user’s previous actions and control signals**.
 
 ### 1️⃣ Clone the Repository
 ```bash
-git clone <YOUR_GIT_REPOSITORY_URL>
+git clone <https://github.com/Iman-Datta/smart-counter.git>
