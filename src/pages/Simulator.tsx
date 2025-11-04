@@ -41,9 +41,9 @@ const Simulator = () => {
     const interval = setInterval(() => {
       setCounter((prev) => {
         if (mode === 'up') {
-          return prev + 1;
+          return (prev + 1) % modN;
         } else if (mode === 'down') {
-          return Math.max(0, prev - 1);
+          return (prev - 1 + modN) % modN;
         } else if (mode === 'mod') {
           return (prev + 1) % modN;
         }
