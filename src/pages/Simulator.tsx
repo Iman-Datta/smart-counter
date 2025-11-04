@@ -6,13 +6,14 @@ import CounterDisplay from "@/components/CounterDisplay";
 import ModeControls from "@/components/ModeControls";
 import AIDecisionLog from "@/components/AIDecisionLog";
 import ActivityChart from "@/components/ActivityChart";
+import CircuitDiagram from "@/components/CircuitDiagram";
 import { useTheme } from "next-themes";
 
-type Mode = 'up' | 'down' | 'mod' | 'ai' | null;
+type Mode = 'up' | 'down' | 'ai' | null;
 
 interface AIDecision {
   timestamp: string;
-  decidedMode: 'up' | 'down' | 'mod';
+  decidedMode: 'up' | 'down';
   reason: string;
   confidence: number;
 }
@@ -24,12 +25,11 @@ const Simulator = () => {
   const [counter, setCounter] = useState(0);
   const [mode, setMode] = useState<Mode>(null);
   const [modN, setModN] = useState(10);
-  const [recentActions, setRecentActions] = useState<('up' | 'down' | 'mod')[]>([]);
+  const [recentActions, setRecentActions] = useState<('up' | 'down')[]>([]);
   const [aiDecisions, setAiDecisions] = useState<AIDecision[]>([]);
   const [activityCounts, setActivityCounts] = useState({
     up: 0,
     down: 0,
-    mod: 0,
     ai: 0,
   });
   const [isRunning, setIsRunning] = useState(false);
@@ -44,8 +44,6 @@ const Simulator = () => {
           return (prev + 1) % modN;
         } else if (mode === 'down') {
           return (prev - 1 + modN) % modN;
-        } else if (mode === 'mod') {
-          return (prev + 1) % modN;
         }
         return prev;
       });
@@ -55,24 +53,22 @@ const Simulator = () => {
   }, [isRunning, mode, modN]);
 
   // AI mode logic
-  const analyzeAndDecide = (): 'up' | 'down' | 'mod' => {
+  const analyzeAndDecide = (): 'up' | 'down' => {
     if (recentActions.length === 0) return 'up';
 
     const counts = {
       up: recentActions.filter(a => a === 'up').length,
       down: recentActions.filter(a => a === 'down').length,
-      mod: recentActions.filter(a => a === 'mod').length,
     };
 
-    const max = Math.max(counts.up, counts.down, counts.mod);
-    const decidedMode = Object.entries(counts).find(([_, count]) => count === max)?.[0] as 'up' | 'down' | 'mod';
+    const max = Math.max(counts.up, counts.down);
+    const decidedMode = Object.entries(counts).find(([_, count]) => count === max)?.[0] as 'up' | 'down';
     
     const confidence = recentActions.length > 0 ? Math.round((max / recentActions.length) * 100) : 50;
     
-    const reasons: Record<'up' | 'down' | 'mod', string> = {
+    const reasons: Record<'up' | 'down', string> = {
       up: `User performed ${counts.up} UP actions out of last ${recentActions.length}`,
       down: `User performed ${counts.down} DOWN actions out of last ${recentActions.length}`,
-      mod: `User performed ${counts.mod} MOD-N actions out of last ${recentActions.length}`,
     };
 
     const decision: AIDecision = {
@@ -139,29 +135,33 @@ const Simulator = () => {
         </div>
 
         {/* Main Content */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - Counter and Controls */}
-          <div className="lg:col-span-2 space-y-6">
-            <CounterDisplay value={counter} mode={mode} />
-            <ModeControls
-              onModeChange={handleModeChange}
-              onReset={handleReset}
-              onModNChange={handleModNChange}
-              currentMode={mode}
-              modNValue={modN}
-            />
+        <div className="space-y-8">
+          {/* Counter and Controls */}
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-6">
+              <CounterDisplay value={counter} mode={mode} />
+              <ModeControls
+                onModeChange={handleModeChange}
+                onReset={handleReset}
+                onModNChange={handleModNChange}
+                currentMode={mode}
+                modNValue={modN}
+              />
+            </div>
+
+            {/* Right Column - AI Log and Activity */}
+            <div className="space-y-6">
+              <AIDecisionLog decisions={aiDecisions} recentActions={recentActions} />
+              <ActivityChart
+                upCount={activityCounts.up}
+                downCount={activityCounts.down}
+                aiCount={activityCounts.ai}
+              />
+            </div>
           </div>
 
-          {/* Right Column - AI Log and Activity */}
-          <div className="space-y-6">
-            <AIDecisionLog decisions={aiDecisions} recentActions={recentActions} />
-            <ActivityChart
-              upCount={activityCounts.up}
-              downCount={activityCounts.down}
-              modCount={activityCounts.mod}
-              aiCount={activityCounts.ai}
-            />
-          </div>
+          {/* Circuit Diagrams */}
+          <CircuitDiagram mode={mode} modN={modN} currentValue={counter} />
         </div>
       </div>
     </div>

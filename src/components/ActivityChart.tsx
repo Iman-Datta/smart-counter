@@ -4,12 +4,11 @@ import { BarChart3 } from "lucide-react";
 interface ActivityChartProps {
   upCount: number;
   downCount: number;
-  modCount: number;
   aiCount: number;
 }
 
-const ActivityChart = ({ upCount, downCount, modCount, aiCount }: ActivityChartProps) => {
-  const total = upCount + downCount + modCount + aiCount;
+const ActivityChart = ({ upCount, downCount, aiCount }: ActivityChartProps) => {
+  const total = upCount + downCount + aiCount;
   
   const getPercentage = (count: number) => {
     return total === 0 ? 0 : Math.round((count / total) * 100);
@@ -18,7 +17,6 @@ const ActivityChart = ({ upCount, downCount, modCount, aiCount }: ActivityChartP
   const modes = [
     { name: 'Up', count: upCount, color: 'bg-green-600', lightColor: 'bg-green-200 dark:bg-green-950' },
     { name: 'Down', count: downCount, color: 'bg-red-600', lightColor: 'bg-red-200 dark:bg-red-950' },
-    { name: 'Mod-N', count: modCount, color: 'bg-blue-600', lightColor: 'bg-blue-200 dark:bg-blue-950' },
     { name: 'AI', count: aiCount, color: 'bg-purple-600', lightColor: 'bg-purple-200 dark:bg-purple-950' },
   ];
 

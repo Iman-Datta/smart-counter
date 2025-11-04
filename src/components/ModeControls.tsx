@@ -1,14 +1,14 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { TrendingUp, TrendingDown, Hash, Brain, RotateCcw } from "lucide-react";
+import { TrendingUp, TrendingDown, Brain, RotateCcw } from "lucide-react";
 import { useState } from "react";
 
 interface ModeControlsProps {
-  onModeChange: (mode: 'up' | 'down' | 'mod' | 'ai') => void;
+  onModeChange: (mode: 'up' | 'down' | 'ai') => void;
   onReset: () => void;
   onModNChange: (n: number) => void;
-  currentMode: 'up' | 'down' | 'mod' | 'ai' | null;
+  currentMode: 'up' | 'down' | 'ai' | null;
   modNValue: number;
 }
 
@@ -25,7 +25,7 @@ const ModeControls = ({ onModeChange, onReset, onModNChange, currentMode, modNVa
 
   return (
     <div className="space-y-6">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
         <Button
           onClick={() => onModeChange('up')}
           variant={currentMode === 'up' ? 'default' : 'outline'}
@@ -48,18 +48,6 @@ const ModeControls = ({ onModeChange, onReset, onModNChange, currentMode, modNVa
         >
           <TrendingDown className="w-5 h-5 mr-2" />
           Down Mode
-        </Button>
-
-        <Button
-          onClick={() => onModeChange('mod')}
-          variant={currentMode === 'mod' ? 'default' : 'outline'}
-          className={currentMode === 'mod' 
-            ? 'bg-blue-600 hover:bg-blue-700 text-white border-blue-600' 
-            : 'hover:bg-blue-50 hover:border-blue-600 dark:hover:bg-blue-950/20'}
-          size="lg"
-        >
-          <Hash className="w-5 h-5 mr-2" />
-          Mod-N Mode
         </Button>
 
         <Button
